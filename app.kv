@@ -1,0 +1,129 @@
+#:import BarChart main.BarChart
+
+<MainUI>:
+    do_default_tab: False
+    tab_width: self.width/3
+    background_color: 0.08,0.08,0.08,1
+
+    TabbedPanelItem:
+        text: "تعریف تسک‌ها"
+        BoxLayout:
+            orientation: "vertical"
+            padding: 20
+            spacing: 10
+
+            Label:
+                text: "چند تا تسک داری؟ (حداکثر 25)"
+                halign: "right"
+                valign: "middle"
+                size_hint_y: None
+                height: 40
+                text_size: self.size
+
+            TextInput:
+                id: task_count
+                hint_text: "مثلا 3"
+                size_hint_y: None
+                height: 40
+                multiline: False
+                halign: "right"
+
+            Button:
+                text: "ثبت تعداد"
+                size_hint_y: None
+                height: 45
+                on_release: root.generate_task_fields()
+
+            ScrollView:
+                do_scroll_x: False
+                GridLayout:
+                    id: task_inputs_container
+                    cols: 1
+                    size_hint_y: None
+                    height: self.minimum_height
+                    spacing: 10
+
+            Button:
+                text: "ثبت نهایی تسک‌ها"
+                size_hint_y: None
+                height: 50
+                on_release: root.save_tasks()
+
+    TabbedPanelItem:
+        text: "ثبت زمان"
+        BoxLayout:
+            orientation: "vertical"
+            padding: 20
+            spacing: 10
+
+            Label:
+                text: "تاریخ شمسی را وارد کن:"
+                size_hint_y: None
+                height: 30
+                halign: "right"
+                valign: "middle"
+                text_size: self.size
+
+            TextInput:
+                id: date_entry
+                hint_text: "مثلا 1401/08/09"
+                size_hint_y: None
+                height: 40
+                multiline: False
+                halign: "right"
+
+            ScrollView:
+                do_scroll_x: False
+                GridLayout:
+                    id: time_inputs_container
+                    cols: 1
+                    size_hint_y: None
+                    height: self.minimum_height
+                    spacing: 10
+
+            Button:
+                text: "ثبت زمان‌ها"
+                size_hint_y: None
+                height: 50
+                on_release: root.save_time_entries()
+
+    TabbedPanelItem:
+        text: "گزارش آماری"
+        BoxLayout:
+            orientation: "vertical"
+            padding: 20
+            spacing: 10
+
+            BoxLayout:
+                size_hint_y: None
+                height: 40
+                spacing: 10
+                TextInput:
+                    id: date_from
+                    hint_text: "از تاریخ (مثلا 1401/08/01)"
+                    multiline: False
+                    halign: "right"
+                TextInput:
+                    id: date_to
+                    hint_text: "تا تاریخ (مثلا 1401/08/30)"
+                    multiline: False
+                    halign: "right"
+
+            Button:
+                text: "نمایش گزارش"
+                size_hint_y: None
+                height: 45
+                on_release: root.generate_report()
+
+            Label:
+                id: report_labels
+                text: ""
+                halign: "right"
+                valign: "top"
+                size_hint_y: None
+                height: 120
+                text_size: self.width, None
+
+            BarChart:
+                id: bar_chart
+                size_hint_y: 1
